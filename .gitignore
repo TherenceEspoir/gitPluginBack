@@ -93,6 +93,7 @@ StyleCopReport.xml
 *.tli
 *.tlh
 *.tmp
+*.csproj
 *.tmp_proj
 *_wpftmp.csproj
 *.log
@@ -403,6 +404,9 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 .idea
+*appsettings.Development.json
+*launchSettings.json
+*appsettings
 
 ##
 ## Visual studio for Mac
