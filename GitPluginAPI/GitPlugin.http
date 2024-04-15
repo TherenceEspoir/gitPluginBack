@@ -1,0 +1,6 @@
+@GitPlugin_HostAddress = http://localhost:5299
+
+GET {{GitPlugin_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
