@@ -20,5 +20,12 @@ namespace GitPlugin.Controllers
         {
             return await _projectService.GetAllProjects();
         }
+
+        [HttpPost]
+        [Route("")]
+        public async Task<string> CreateProject(string name, string description, string path, bool initializeWithReadme)
+        {
+            return await _projectService.CreateProject(name, description, path, initializeWithReadme);
+        }
     }
 }

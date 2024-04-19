@@ -1,7 +1,9 @@
 namespace GitPlugin.Repository;
 
-using System.Net.Http.Json;
 using GitPlugin.Core.Repository;
+using System;
+using System.Text;
+using System.Text.Json;
 
 public class ProjectRepository : IProjectRepository
 {
@@ -10,20 +12,37 @@ public class ProjectRepository : IProjectRepository
     public ProjectRepository()
     {
         _httpClient = new HttpClient();
-        _httpClient.BaseAddress = new Uri("https://gitlab.com/api/v4/projects?owned=true");
+        _httpClient.BaseAddress = new Uri("https://gitlab.com/api/v4/projects");
         _httpClient.DefaultRequestHeaders.Add("PRIVATE-TOKEN", "glpat-2pSgqLqM-2vkyEhxF_xb");
     }
     
     public async Task<string> SelectAll()
     {
         
-        HttpResponseMessage response = await _httpClient.GetAsync("");
-        
-        
+        HttpResponseMessage response = await _httpClient.GetAsync("?owned=true");
         response.EnsureSuccessStatusCode();
-
-        var coucou =await response.Content.ReadAsStringAsync(); 
+        var result =await response.Content.ReadAsStringAsync(); 
         
-        return coucou;
+        return result;
     }
+    
+
+    public async Task<string> CreateProject(string name, string description, string path, bool initializeWithReadme)
+    {
+        var postData = new
+        {
+            name,
+            description,
+            path,
+            initialize_with_readme = initializeWithReadme
+        };
+
+        var jsonContent = JsonSerializer.Serialize(postData);
+        var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+        var response = await _httpClient.PostAsync("", content); 
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStringAsync();
+    }
+
 }

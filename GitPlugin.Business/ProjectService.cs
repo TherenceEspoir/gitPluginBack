@@ -15,5 +15,9 @@ public class ProjectService : IProjectService
     {
         return await _projectRepository.SelectAll();
     }
-    
+
+    public async Task<string> CreateProject(string name, string description, string path,  bool initializeWithReadme)
+    {
+        return await _projectRepository.CreateProject(name, description, path, initializeWithReadme);
+    }
 }
