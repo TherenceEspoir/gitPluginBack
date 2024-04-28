@@ -11,4 +11,11 @@ public interface IProjectService
 
     Task<string> GetAllProjectMergeRequest(int projectId);
 
+    Task<string> GetAllProjectPipelines(int projectId);
+    
+    Task<string> GetAllProjectReleases(int projectId);
+    
+    Task<string> GetAllLanguages(int projectId);
+    
+    Task<string> GetAllContributors(int projectId);
 }

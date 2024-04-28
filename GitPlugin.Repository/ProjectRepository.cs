@@ -27,7 +27,7 @@ public class ProjectRepository : IProjectRepository
         var result =await response.Content.ReadAsStringAsync(); 
         return result;
     }
-
+    /*
     public async Task<string> SelectAllProjectIssues(int projectId)
     {
         string requestUrl = $"projects/{projectId}/issues";
@@ -35,6 +35,24 @@ public class ProjectRepository : IProjectRepository
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadAsStringAsync();
     }
+    */
+    public async Task<string> SelectAllProjectIssues(int projectId)
+    {
+        string requestUrl = $"projects/{projectId}/issues";
+        HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+        response.EnsureSuccessStatusCode();
+        string responseContent = await response.Content.ReadAsStringAsync();
+
+        // Deserialize and then serialize to ensure proper character encoding
+        var options = new JsonSerializerOptions
+        {
+            Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+        };
+
+        var issues = JsonSerializer.Deserialize<object>(responseContent);
+        return JsonSerializer.Serialize(issues, options);
+    }
+
     
     public async Task<string> CreateProject(string name, string description, string path, bool initializeWithReadme)
     {
@@ -62,4 +80,35 @@ public class ProjectRepository : IProjectRepository
         return await response.Content.ReadAsStringAsync();
     }
 
+    public async Task<string> SelectAllPipelines(int projectId)
+    {
+        string requestUrl = $"projects/{projectId}/pipelines";
+        HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStringAsync();
+    }
+
+    public async Task<string> SelectAllReleases(int projectId)
+    {
+        string requestUrl = $"projects/{projectId}/releases";
+        HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStringAsync();
+    }
+
+    public async Task<string> SelectAllLanguages(int projectId)
+    {
+        string requestUrl = $"projects/{projectId}/languages";
+        HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStringAsync();
+    }
+
+    public async Task<string> SelectProjectContributors(int projectId)
+    {
+        string requestUrl = $"projects/{projectId}/repository/contributors";
+        HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStringAsync();
+    }
 }

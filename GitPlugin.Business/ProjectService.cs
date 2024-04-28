@@ -30,4 +30,24 @@ public class ProjectService : IProjectService
     {
         return await _projectRepository.CreateProject(name, description, path, initializeWithReadme);
     }
+
+    public async Task<string> GetAllProjectPipelines(int projectId)
+    {
+        return await _projectRepository.SelectAllPipelines(projectId);
+    }
+
+    public async Task<string> GetAllProjectReleases(int projectId)
+    {
+        return await _projectRepository.SelectAllReleases(projectId);
+    }
+
+    public async Task<string> GetAllLanguages(int projectId)
+    {
+        return await _projectRepository.SelectAllLanguages(projectId);
+    }
+
+    public async Task<string> GetAllContributors(int projectId)
+    {
+        return await _projectRepository.SelectProjectContributors(projectId);
+    }
 }
