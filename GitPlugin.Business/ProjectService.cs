@@ -20,6 +20,11 @@ public class ProjectService : IProjectService
     {
         return await _projectRepository.SelectAllProjectIssues(projectId);
     }
+    
+    public async Task<string> GetAllProjectMergeRequest(int projectId)
+    {
+        return await _projectRepository.SelectAllMergeRequest(projectId);
+    }
 
     public async Task<string> CreateProject(string name, string description, string path,  bool initializeWithReadme)
     {

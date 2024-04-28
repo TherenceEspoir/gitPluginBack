@@ -20,19 +20,19 @@ namespace GitPlugin.Controllers
         {
             return await _projectService.GetAllProjects();
         }
-        /*
-        [HttpGet("{projectId}/issues")]
-        public async Task<string> GetProjectIssues(int projectId)
-        {
-            return await _projectService.GetAllIssues(projectId);
-        }
-        */
         
         [HttpGet]
         [Route("{projectId}/issues")] 
         public async Task<string> GetProjectIssues(int projectId)
         {
             return await _projectService.GetAllProjectIssues(projectId);
+        }
+        
+        [HttpGet]
+        [Route("{projectId}/merge_request")] 
+        public async Task<string> GetProjectMergeRequest(int projectId)
+        {
+            return await _projectService.GetAllProjectMergeRequest(projectId);
         }
         
         [HttpPost]

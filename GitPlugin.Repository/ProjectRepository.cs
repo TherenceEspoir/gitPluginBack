@@ -54,4 +54,12 @@ public class ProjectRepository : IProjectRepository
         return await response.Content.ReadAsStringAsync();
     }
 
+    public async Task<string> SelectAllMergeRequest(int projectId)
+    {
+        string requestUrl = $"projects/{projectId}/merge_requests?state=all";
+        HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStringAsync();
+    }
+
 }

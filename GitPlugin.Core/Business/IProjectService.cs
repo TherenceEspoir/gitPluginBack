@@ -9,4 +9,6 @@ public interface IProjectService
     Task<string> CreateProject(string name, string description, string path,
         bool initializeWithReadme);
 
+    Task<string> GetAllProjectMergeRequest(int projectId);
+
 }
