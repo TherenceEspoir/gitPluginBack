@@ -10,4 +10,10 @@
       <ProjectReference Include="..\GitPlugin.Core\GitPlugin.Core.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="Microsoft.AspNetCore.Http.Abstractions">
+        <HintPath>..\..\..\..\..\..\usr\share\dotnet\shared\Microsoft.AspNetCore.App\8.0.4\Microsoft.AspNetCore.Http.Abstractions.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

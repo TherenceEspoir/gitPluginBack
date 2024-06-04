@@ -15,7 +15,7 @@ public class ProjectService : IProjectService
     {
         return await _projectRepository.SelectAll();
     }
-
+    
     public async Task<string> GetAllProjectIssues(int projectId)
     {
         return await _projectRepository.SelectAllProjectIssues(projectId);
@@ -49,5 +49,20 @@ public class ProjectService : IProjectService
     public async Task<string> GetAllContributors(int projectId)
     {
         return await _projectRepository.SelectProjectContributors(projectId);
+    }
+
+    public async Task<string> CreateIssue(int projectId, string title, string description)
+    {
+        return await _projectRepository.CreateIssue(projectId,title,description);
+    }
+    
+    public async Task<string> DeleteIssue(int projectId, int issueId)
+    {
+        return await _projectRepository.DeleteIssue(projectId, issueId);
+    }
+
+    public async Task<string> UpdateIssueState(int projectId, int issueId, string stateEvent)
+    {
+        return await  _projectRepository.UpdateIssueState( projectId,  issueId, stateEvent);
     }
 }

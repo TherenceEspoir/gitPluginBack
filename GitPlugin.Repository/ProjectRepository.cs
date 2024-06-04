@@ -1,17 +1,19 @@
+
 namespace GitPlugin.Repository;
 
 using GitPlugin.Core.Repository;
 using System;
 using System.Text;
 using System.Text.Json;
+using System;
+using System.Net.Http;
 
 public class ProjectRepository : IProjectRepository
 {
     private readonly HttpClient _httpClient;
     private const string BaseUrl = "https://gitlab.com/api/v4/projects";
     private const string PrivateToken = "glpat-2pSgqLqM-2vkyEhxF_xb";
-
-
+    
     public ProjectRepository()
     {
         _httpClient = new HttpClient();
@@ -21,21 +23,11 @@ public class ProjectRepository : IProjectRepository
     
     public async Task<string> SelectAll()
     {
-        
         HttpResponseMessage response = await _httpClient.GetAsync("?owned=true");
         response.EnsureSuccessStatusCode();
         var result =await response.Content.ReadAsStringAsync(); 
         return result;
     }
-    /*
-    public async Task<string> SelectAllProjectIssues(int projectId)
-    {
-        string requestUrl = $"projects/{projectId}/issues";
-        HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
-        response.EnsureSuccessStatusCode();
-        return await response.Content.ReadAsStringAsync();
-    }
-    */
     public async Task<string> SelectAllProjectIssues(int projectId)
     {
         string requestUrl = $"projects/{projectId}/issues";
@@ -111,4 +103,53 @@ public class ProjectRepository : IProjectRepository
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadAsStringAsync();
     }
+
+    public async Task<string> CreateIssue(int projectId, string title, string description)
+    {
+        string requestUrl = $"projects/{projectId}/issues";
+
+        var postData = new
+        {
+            title,
+            description
+        };
+
+        var jsonContent = JsonSerializer.Serialize(postData);
+        var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+        var response = await _httpClient.PostAsync(requestUrl, content);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadAsStringAsync();
+    }
+    
+    public async Task<string> DeleteIssue(int projectId, int issueId)
+    {
+        string requestUrl = $"projects/{projectId}/issues/{issueId}";
+
+        var response = await _httpClient.DeleteAsync(requestUrl);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadAsStringAsync();
+    }
+
+    public async Task<string> UpdateIssueState(int projectId, int issueId, string stateEvent)
+    {
+        string requestUrl = $"projects/{projectId}/issues/{issueId}";
+
+        var postData = new
+        {
+            state_event = stateEvent
+        };
+
+        var jsonContent = JsonSerializer.Serialize(postData);
+        var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+        var response = await _httpClient.PutAsync(requestUrl, content);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadAsStringAsync();
+    }
+
 }
+
