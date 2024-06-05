@@ -34,8 +34,7 @@ public class ProjectRepository : IProjectRepository
         HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
         response.EnsureSuccessStatusCode();
         string responseContent = await response.Content.ReadAsStringAsync();
-
-        // Deserialize and then serialize to ensure proper character encoding
+        
         var options = new JsonSerializerOptions
         {
             Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping
@@ -182,24 +181,44 @@ public class ProjectRepository : IProjectRepository
         return await response.Content.ReadAsStringAsync();
     }
 
-    public Task<string> CreateMergeRequest(int projectId, string sourceBranch, string targetBranch, string title, string description)
+    public async Task<string> CreateMergeRequest(int projectId, string sourceBranch, string targetBranch, string title, string description)
     {
-        throw new NotImplementedException();
+        string requestUrl = $"projects/{projectId}/merge_requests";
+
+        var postData = new
+        {
+            source_branch = sourceBranch,
+            target_branch = targetBranch,
+            title,
+            description
+        };
+
+        var jsonContent = JsonSerializer.Serialize(postData);
+        var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+        var response = await _httpClient.PostAsync(requestUrl, content);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadAsStringAsync();
     }
 
     public async Task<string> DeleteMergeRequest(int projectId, int mergeRequestId)
     {
-        string requestUrl = $"{projectId}/merge_requests/{mergeRequestId}";
+        string requestUrl = $"projects/{projectId}/merge_requests/{mergeRequestId}";
 
         var response = await _httpClient.DeleteAsync(requestUrl);
-        response.EnsureSuccessStatusCode();
+        if (!response.IsSuccessStatusCode)
+        {
+            string errorContent = await response.Content.ReadAsStringAsync();
+            throw new HttpRequestException($"Error deleting merge request: {response.StatusCode}, {errorContent}");
+        }
 
         return await response.Content.ReadAsStringAsync();
     }
 
     public async Task<string> UpdateMergeRequest(int projectId, int mergeRequestId, string title, string description)
     {
-        string requestUrl = $"{projectId}/merge_requests/{mergeRequestId}";
+        string requestUrl = $"projects/{projectId}/merge_requests/{mergeRequestId}";
 
         var postData = new
         {

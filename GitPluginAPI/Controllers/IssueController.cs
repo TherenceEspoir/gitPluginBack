@@ -4,6 +4,8 @@ namespace GitPlugin.Controllers
     using GitPlugin.Business;
     using GitPlugin.Core.Business;
     
+    [Route("api/[controller]")]
+    [ApiController]
     public class IssueController : ControllerBase
     {
         private readonly IProjectService _projectService;
