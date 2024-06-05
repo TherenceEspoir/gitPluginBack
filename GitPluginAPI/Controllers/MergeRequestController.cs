@@ -21,5 +21,26 @@ namespace GitPlugin.Controllers
         {
             return await _projectService.GetAllProjectMergeRequest(projectId);
         }
+
+        [HttpPost]
+        [Route("{projectId}/merge_request")]
+        public async Task<string> CreateMergeRequest(int projectId, string sourceBranch, string targetBranch, string title, string description)
+        {
+            return await _projectService.CreateMergeRequest(projectId, sourceBranch, targetBranch, title, description);
+        }
+
+        [HttpDelete]
+        [Route("{projectId}/merge_request/{mergeRequestId}")]
+        public async Task<string> DeleteMergeRequest(int projectId, int mergeRequestId)
+        {
+            return await _projectService.DeleteMergeRequest(projectId, mergeRequestId);
+        }
+
+        [HttpPut]
+        [Route("{projectId}/merge_request/{mergeRequestId}")]
+        public async Task<string> UpdateMergeRequest(int projectId, int mergeRequestId, string title, string description)
+        {
+            return await _projectService.UpdateMergeRequest(projectId, mergeRequestId, title, description);
+        }
     }
 }

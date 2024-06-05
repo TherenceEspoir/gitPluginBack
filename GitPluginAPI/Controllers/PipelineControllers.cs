@@ -3,8 +3,7 @@ namespace GitPlugin.Controllers
     using Microsoft.AspNetCore.Mvc;
     using GitPlugin.Business;
     using GitPlugin.Core.Business;
-
-    [Route("api/[controller]")]
+    
     [ApiController]
     public class PipelineController : ControllerBase
     {

@@ -21,42 +21,6 @@ namespace GitPlugin.Controllers
             return await _projectService.GetAllProjects();
         }
         
-        
-        [HttpGet]
-        [Route("{projectId}/merge_request")] 
-        public async Task<string> GetProjectMergeRequest(int projectId)
-        {
-            return await _projectService.GetAllProjectMergeRequest(projectId);
-        }
-        
-        [HttpGet]
-        [Route("{projectId}/pipelines")] 
-        public async Task<string> GetProjectPipelines(int projectId)
-        {
-            return await _projectService.GetAllProjectPipelines(projectId);
-        }
-        
-        [HttpGet]
-        [Route("{projectId}/releases")] 
-        public async Task<string> GetProjectReleases(int projectId)
-        {
-            return await _projectService.GetAllProjectReleases(projectId);
-        }
-        
-        [HttpGet]
-        [Route("{projectId}/languages")] 
-        public async Task<string> GetProjectLanguages(int projectId)
-        {
-            return await _projectService.GetAllLanguages(projectId);
-        }
-        
-        [HttpGet]
-        [Route("{projectId}/contributors")] 
-        public async Task<string> GetProjectContributors(int projectId)
-        {
-            return await _projectService.GetAllContributors(projectId);
-        }
-        
         [HttpPost]
         [Route("")]
         public async Task<string> CreateProject(string name, string description, string path, bool initializeWithReadme)
@@ -64,31 +28,19 @@ namespace GitPlugin.Controllers
             return await _projectService.CreateProject(name, description, path, initializeWithReadme);
         }
         
-        [HttpPost]
-        [Route("{projectId}/issues")]
-        public async Task<string> CreateIssue(int projectId, string title, string description)
+        [HttpDelete]
+        [Route("{projectId}")]
+        public async Task<string> DeleteProject(int projectId)
         {
-            return await _projectService.CreateIssue(projectId, title, description);
+            return await _projectService.DeleteProject(projectId);
         }
 
-        [HttpDelete]
-        [Route("{projectId}/issues/{issueId}")]
-        public async Task<string> DeleteIssue(int projectId, int issueIid)
-        {
-            return await _projectService.DeleteIssue(projectId, issueIid);
-        }
-        
-        [HttpGet]
-        [Route("{projectId}/issues")] 
-        public async Task<string> GetProjectIssues(int projectId)
-        {
-            return await _projectService.GetAllProjectIssues(projectId);
-        }
+        // Mettre à jour un projet
         [HttpPut]
-        [Route("{projectId}/issues/{issueId}")]
-        public async Task<string> UpdateIssueState(int projectId, int issueId, string state_event)
+        [Route("{projectId}")]
+        public async Task<string> UpdateProject(int projectId, string name, string description, string path)
         {
-            return await _projectService.UpdateIssueState(projectId, issueId, state_event);
+            return await _projectService.UpdateProject(projectId, name, description, path);
         }
         
     }

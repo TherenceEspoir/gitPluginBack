@@ -65,4 +65,29 @@ public class ProjectService : IProjectService
     {
         return await  _projectRepository.UpdateIssueState( projectId,  issueId, stateEvent);
     }
+
+    public async Task<string> DeleteProject(int projectId)
+    {
+        return await  _projectRepository.DeleteProject( projectId);
+    }
+
+    public async Task<string> UpdateProject(int projectId, string name, string description, string path)
+    {
+        return await _projectRepository.UpdateProject(projectId, name, description, path);
+    }
+
+    public async Task<string> CreateMergeRequest(int projectId, string sourceBranch, string targetBranch, string title, string description)
+    {
+        return await _projectRepository.CreateMergeRequest(projectId, sourceBranch, targetBranch, title, description);
+    }
+
+    public async Task<string> DeleteMergeRequest(int projectId, int mergeRequestId)
+    {
+        return await _projectRepository.DeleteMergeRequest(projectId,mergeRequestId);
+    }
+
+    public async Task<string> UpdateMergeRequest(int projectId, int mergeRequestId, string title, string description)
+    {
+        return await _projectRepository.UpdateMergeRequest(projectId, mergeRequestId, title, description);
+    }
 }

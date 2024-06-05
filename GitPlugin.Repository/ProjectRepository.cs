@@ -151,5 +151,70 @@ public class ProjectRepository : IProjectRepository
         return await response.Content.ReadAsStringAsync();
     }
 
+    public async Task<string> DeleteProject(int projectId)
+    {
+        string requestUrl = $"{projectId}";
+
+        HttpResponseMessage response = await _httpClient.DeleteAsync(requestUrl);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadAsStringAsync();
+    }
+
+
+    public async Task<string> UpdateProject(int projectId, string name, string description, string path)
+    {
+        string requestUrl = $"{projectId}";
+
+        var postData = new
+        {
+            name,
+            description,
+            path
+        };
+
+        var jsonContent = JsonSerializer.Serialize(postData);
+        var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+        HttpResponseMessage response = await _httpClient.PutAsync(requestUrl, content);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadAsStringAsync();
+    }
+
+    public Task<string> CreateMergeRequest(int projectId, string sourceBranch, string targetBranch, string title, string description)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<string> DeleteMergeRequest(int projectId, int mergeRequestId)
+    {
+        string requestUrl = $"{projectId}/merge_requests/{mergeRequestId}";
+
+        var response = await _httpClient.DeleteAsync(requestUrl);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadAsStringAsync();
+    }
+
+    public async Task<string> UpdateMergeRequest(int projectId, int mergeRequestId, string title, string description)
+    {
+        string requestUrl = $"{projectId}/merge_requests/{mergeRequestId}";
+
+        var postData = new
+        {
+            title,
+            description
+        };
+
+        var jsonContent = JsonSerializer.Serialize(postData);
+        var content = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+
+        var response = await _httpClient.PutAsync(requestUrl, content);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadAsStringAsync();
+    }
+
 }
 
