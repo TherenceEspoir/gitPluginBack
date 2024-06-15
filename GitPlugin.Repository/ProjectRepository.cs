@@ -152,7 +152,7 @@ public class ProjectRepository : IProjectRepository
 
     public async Task<string> DeleteProject(int projectId)
     {
-        string requestUrl = $"{projectId}";
+        string requestUrl = $"projects/{projectId}";
 
         HttpResponseMessage response = await _httpClient.DeleteAsync(requestUrl);
         response.EnsureSuccessStatusCode();
@@ -161,15 +161,15 @@ public class ProjectRepository : IProjectRepository
     }
 
 
-    public async Task<string> UpdateProject(int projectId, string name, string description, string path)
+    public async Task<string> UpdateProject(int projectId, string name, string description)
     {
-        string requestUrl = $"{projectId}";
+
+        string requestUrl = $"projects/{projectId}";
 
         var postData = new
         {
             name,
-            description,
-            path
+            description
         };
 
         var jsonContent = JsonSerializer.Serialize(postData);

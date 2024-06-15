@@ -38,9 +38,9 @@ namespace GitPlugin.Controllers
         // Mettre à jour un projet
         [HttpPut]
         [Route("{projectId}")]
-        public async Task<string> UpdateProject(int projectId, string name, string description, string path)
+        public async Task<string> UpdateProject(int projectId, string name, string description)
         {
-            return await _projectService.UpdateProject(projectId, name, description, path);
+            return await _projectService.UpdateProject(projectId, name, description);
         }
         
     }

@@ -71,9 +71,9 @@ public class ProjectService : IProjectService
         return await  _projectRepository.DeleteProject( projectId);
     }
 
-    public async Task<string> UpdateProject(int projectId, string name, string description, string path)
+    public async Task<string> UpdateProject(int projectId, string name, string description)
     {
-        return await _projectRepository.UpdateProject(projectId, name, description, path);
+        return await _projectRepository.UpdateProject(projectId, name, description);
     }
 
     public async Task<string> CreateMergeRequest(int projectId, string sourceBranch, string targetBranch, string title, string description)
