@@ -114,9 +114,13 @@ L'application utilise un système d'authentification basique avec JWT. Utilisez 
 -   `[GET] /api/MergeRequest/{projectId}/merge_request/{mergeRequestId}`: Récupérer une merge request par ID.
 
 
+![Description de l'image](https://gitlab.dpt-info.univ-littoral.fr/houedji.espoir/gitplugin/-/raw/main/images/capture1.png)
+
+
 ## Notes finales
 
 -   La documentation de l'API est disponible via Swagger à l'adresse `http://localhost:5299/swagger/index.html`.
 -   Les décisions de conception, les choix technologiques et les défis rencontrés ont été documentés tout au long du développement.
 -   Étant donné que je viens de commencer sur Dash, j'ai eu pas mal de difficultés, surtout au niveau de la redirection et du callback, donc à certains endroits, il est important de réactualiser la page après un login.
 -   Pour toute question ou suggestion, veuillez contacter l'équipe à l'adresse mail fournie.
+
