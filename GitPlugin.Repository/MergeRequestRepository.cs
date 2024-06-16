@@ -87,4 +87,11 @@ public class MergeRequestRepository : IMergeRequestRepository
         return await response.Content.ReadAsStringAsync();
     }
 
+    public async Task<string> GetMergeRequestById(int projectId, int mergeRequestId)
+    {
+        string requestUrl = $"projects/{projectId}/merge_requests/{mergeRequestId}";
+        HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadAsStringAsync();
+    }
 }

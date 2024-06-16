@@ -33,4 +33,9 @@ public class MergeService : IMergeService
     {
         return await _mergerequestRepository.UpdateMergeRequest(projectId, mergeRequestId, title, description);
     }
+
+    public async Task<string> GetMergeRequestById(int projectId, int mergeRequestId)
+    {
+        return await _mergerequestRepository.GetMergeRequestById(projectId,mergeRequestId);
+    }
 }

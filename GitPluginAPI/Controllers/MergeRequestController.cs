@@ -3,9 +3,12 @@ namespace GitPlugin.Controllers
     using Microsoft.AspNetCore.Mvc;
     using GitPlugin.Business;
     using GitPlugin.Core.Business;
+    using Microsoft.AspNetCore.Authorization;
 
+    
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class MergeRequestController : ControllerBase
     {
        
@@ -21,6 +24,13 @@ namespace GitPlugin.Controllers
         public async Task<string> GetProjectMergeRequest(int projectId)
         {
             return await _mergeService.GetAllProjectMergeRequest(projectId);
+        }
+        
+        [HttpGet]
+        [Route("{projectId}/merge_request/{mergeRequestId}")]
+        public async Task<string> GetMergeRequestById(int projectId, int mergeRequestId)
+        {
+            return await _mergeService.GetMergeRequestById(projectId, mergeRequestId);
         }
 
         [HttpPost]
