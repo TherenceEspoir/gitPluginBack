@@ -3,7 +3,9 @@ namespace GitPlugin.Controllers
     using Microsoft.AspNetCore.Mvc;
     using GitPlugin.Business;
     using GitPlugin.Core.Business;
+    using Microsoft.AspNetCore.Authorization;
 
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProjectController : ControllerBase
@@ -15,6 +17,7 @@ namespace GitPlugin.Controllers
             _projectService = projectService;
         }
         
+        [AllowAnonymous]
         [HttpGet]
         public async Task<string> GetAll()
         {
