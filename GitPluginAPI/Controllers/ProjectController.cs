@@ -21,6 +21,12 @@ namespace GitPlugin.Controllers
             return await _projectService.GetAllProjects();
         }
         
+        [HttpGet("{projectId}")]
+        public async Task<string> GetProjectById(int projectId)
+        {
+            return await _projectService.GetProjectById(projectId);
+        }
+        
         [HttpPost]
         [Route("")]
         public async Task<string> CreateProject(string name, string description, string path, bool initializeWithReadme)

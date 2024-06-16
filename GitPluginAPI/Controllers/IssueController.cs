@@ -23,24 +23,31 @@ namespace GitPlugin.Controllers
         }
 
         [HttpDelete]
-        [Route("{projectId}/issues/{issueId}")]
-        public async Task<string> DeleteIssue(int projectId, int issueIid)
+        [Route("{projectId}/issues/{issueiid}")]
+        public async Task<string> DeleteIssue(int projectId, int issueiid)
         {
-            return await _projectService.DeleteIssue(projectId, issueIid);
+            return await _projectService.DeleteIssue(projectId, issueiid);
         }
-
+        
         [HttpGet]
         [Route("{projectId}/issues")]
         public async Task<string> GetProjectIssues(int projectId)
         {
             return await _projectService.GetAllProjectIssues(projectId);
         }
+        
+        [HttpGet]
+        [Route("{projectId}/issues/{issueId}")]
+        public async Task<string> GetIssueById(int projectId, int issueId)
+        {
+            return await _projectService.GetIssueById(projectId, issueId);
+        }
 
         [HttpPut]
         [Route("{projectId}/issues/{issueId}")]
-        public async Task<string> UpdateIssueState(int projectId, int issueId, string state_event)
+        public async Task<string> UpdateIssueState(int projectId, int issueId, string title, string description)
         {
-            return await _projectService.UpdateIssueState(projectId, issueId, state_event);
+            return await _projectService.UpdateIssueState(projectId, issueId, title, description);
         }
     }
 }
