@@ -19,9 +19,9 @@ builder.Services.AddAuthentication(x =>
 {
     x.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidIssuer = "https://gitplugin.com",
-        ValidAudience = "https://gitplugin.com",
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("TotoMaCle")),
+        ValidIssuer = "http://localhost:5299",
+        ValidAudience = "http://localhost:5299",
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("lecoqchantelejoursarretetoutselevedanslevillage")),
         ValidateIssuer = true,
         ValidateAudience = true,
         ValidateLifetime = true,

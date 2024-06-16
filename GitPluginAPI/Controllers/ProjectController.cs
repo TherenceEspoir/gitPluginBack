@@ -24,6 +24,7 @@ namespace GitPlugin.Controllers
             return await _projectService.GetAllProjects();
         }
         
+        [AllowAnonymous]
         [HttpGet("{projectId}")]
         public async Task<string> GetProjectById(int projectId)
         {
@@ -34,6 +35,7 @@ namespace GitPlugin.Controllers
         [Route("")]
         public async Task<string> CreateProject(string name, string description, string path, bool initializeWithReadme)
         {
+            var token = Request.Headers["Authorization"].ToString();
             return await _projectService.CreateProject(name, description, path, initializeWithReadme);
         }
         

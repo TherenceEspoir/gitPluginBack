@@ -36,7 +36,7 @@ public class IdentityController : ControllerBase
 
             var tokenHandler = new JwtSecurityTokenHandler();
 
-            var key = Encoding.UTF8.GetBytes("ma clé super secrète à ne jamais dévoiler à qui que ce soit que je devrais mettre dans un Keyvault ou tout autre technologie de ce genre");
+            var key = Encoding.UTF8.GetBytes("lecoqchantelejoursarretetoutselevedanslevillage");
             var claims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
@@ -49,8 +49,8 @@ public class IdentityController : ControllerBase
             {
                 Subject = new ClaimsIdentity(claims),
                 Expires = DateTime.UtcNow.Add(TimeSpan.FromMinutes(5)),
-                Issuer = "https://betco.com",
-                Audience = "https://betco.com",
+                Issuer = "http://localhost:5299",
+                Audience = "http://localhost:5299",
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256),
             };
 
