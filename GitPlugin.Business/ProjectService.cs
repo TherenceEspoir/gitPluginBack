@@ -16,16 +16,6 @@ public class ProjectService : IProjectService
         return await _projectRepository.SelectAll();
     }
     
-    public async Task<string> GetAllProjectIssues(int projectId)
-    {
-        return await _projectRepository.SelectAllProjectIssues(projectId);
-    }
-    
-    public async Task<string> GetAllProjectMergeRequest(int projectId)
-    {
-        return await _projectRepository.SelectAllMergeRequest(projectId);
-    }
-
     public async Task<string> CreateProject(string name, string description, string path,  bool initializeWithReadme)
     {
         return await _projectRepository.CreateProject(name, description, path, initializeWithReadme);
@@ -50,22 +40,7 @@ public class ProjectService : IProjectService
     {
         return await _projectRepository.SelectProjectContributors(projectId);
     }
-
-    public async Task<string> CreateIssue(int projectId, string title, string description)
-    {
-        return await _projectRepository.CreateIssue(projectId,title,description);
-    }
     
-    public async Task<string> DeleteIssue(int projectId, int issueId)
-    {
-        return await _projectRepository.DeleteIssue(projectId, issueId);
-    }
-
-    public async Task<string> UpdateIssueState(int projectId, int issueId, string title, string description)
-    {
-        return await  _projectRepository.UpdateIssueState( projectId,  issueId, title,description);
-    }
-
     public async Task<string> DeleteProject(int projectId)
     {
         return await  _projectRepository.DeleteProject( projectId);
@@ -75,29 +50,9 @@ public class ProjectService : IProjectService
     {
         return await _projectRepository.UpdateProject(projectId, name, description);
     }
-
-    public async Task<string> CreateMergeRequest(int projectId, string sourceBranch, string targetBranch, string title, string description)
-    {
-        return await _projectRepository.CreateMergeRequest(projectId, sourceBranch, targetBranch, title, description);
-    }
-
-    public async Task<string> DeleteMergeRequest(int projectId, int mergeRequestId)
-    {
-        return await _projectRepository.DeleteMergeRequest(projectId,mergeRequestId);
-    }
-
-    public async Task<string> UpdateMergeRequest(int projectId, int mergeRequestId, string title, string description)
-    {
-        return await _projectRepository.UpdateMergeRequest(projectId, mergeRequestId, title, description);
-    }
-
+    
     public async Task<string> GetProjectById(int projectId)
     {
         return await _projectRepository.GetProjectById(projectId);
-    }
-
-    public async Task<string> GetIssueById(int projectId, int issueId)
-    {
-        return await _projectRepository.GetIssueById(projectId, issueId);
     }
 }

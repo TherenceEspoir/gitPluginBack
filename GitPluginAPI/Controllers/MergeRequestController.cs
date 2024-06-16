@@ -8,39 +8,40 @@ namespace GitPlugin.Controllers
     [ApiController]
     public class MergeRequestController : ControllerBase
     {
-        private readonly IProjectService _projectService;
+       
+        private readonly IMergeService _mergeService;
 
-        public MergeRequestController(IProjectService projectService)
+        public MergeRequestController(IMergeService mergeService)
         {
-            _projectService = projectService;
+            _mergeService = mergeService;
         }
 
         [HttpGet]
         [Route("{projectId}/merge_request")]
         public async Task<string> GetProjectMergeRequest(int projectId)
         {
-            return await _projectService.GetAllProjectMergeRequest(projectId);
+            return await _mergeService.GetAllProjectMergeRequest(projectId);
         }
 
         [HttpPost]
         [Route("{projectId}/merge_request")]
         public async Task<string> CreateMergeRequest(int projectId, string sourceBranch, string targetBranch, string title, string description)
         {
-            return await _projectService.CreateMergeRequest(projectId, sourceBranch, targetBranch, title, description);
+            return await _mergeService.CreateMergeRequest(projectId, sourceBranch, targetBranch, title, description);
         }
 
         [HttpDelete]
         [Route("{projectId}/merge_request/{mergeRequestId}")]
         public async Task<string> DeleteMergeRequest(int projectId, int mergeRequestId)
         {
-            return await _projectService.DeleteMergeRequest(projectId, mergeRequestId);
+            return await _mergeService.DeleteMergeRequest(projectId, mergeRequestId);
         }
 
         [HttpPut]
         [Route("{projectId}/merge_request/{mergeRequestId}")]
         public async Task<string> UpdateMergeRequest(int projectId, int mergeRequestId, string title, string description)
         {
-            return await _projectService.UpdateMergeRequest(projectId, mergeRequestId, title, description);
+            return await _mergeService.UpdateMergeRequest(projectId, mergeRequestId, title, description);
         }
     }
 }

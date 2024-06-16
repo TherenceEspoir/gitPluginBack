@@ -69,6 +69,12 @@ builder.Services.AddSwaggerGen(option =>
 builder.Services.AddTransient<IProjectService, ProjectService>();
 builder.Services.AddTransient<IProjectRepository, ProjectRepository>();
 
+builder.Services.AddTransient<IIssueService, IssueService>();
+builder.Services.AddTransient<IIssueRepository, IssueRepository>();
+
+builder.Services.AddTransient<IMergeService, MergeService>();
+builder.Services.AddTransient<IMergeRequestRepository, MergeRequestRepository>();
+
 var app = builder.Build();
 
 app.UseRouting();
