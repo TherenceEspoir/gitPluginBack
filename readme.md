@@ -113,11 +113,12 @@ L'application utilise un système d'authentification basique avec JWT. Utilisez 
 -   `[DELETE] /api/MergeRequest/{projectId}/merge_request/{mergeRequestId}`: Supprimer une merge request.
 -   `[GET] /api/MergeRequest/{projectId}/merge_request/{mergeRequestId}`: Récupérer une merge request par ID.
 
+Quelques vues du frontend, rien de très spécial .Le but étant de travailler l'architecture ntier coté back.
 
 ![Description de l'image](images/capture1.png)
-![Description de l'image](https://gitlab.dpt-info.univ-littoral.fr/houedji.espoir/gitplugin/-/raw/main/images/capture2.png)
-![Description de l'image](https://gitlab.dpt-info.univ-littoral.fr/houedji.espoir/gitplugin/-/raw/main/images/languages.png)
-![Description de l'image](https://gitlab.dpt-info.univ-littoral.fr/houedji.espoir/gitplugin/-/raw/main/images/release.png)
+![Description de l'image](images/capture2.png)
+![Description de l'image](images/languages.png)
+![Description de l'image](images/release.png)
 
 
 ## Notes finales
