@@ -114,7 +114,7 @@ L'application utilise un système d'authentification basique avec JWT. Utilisez 
 -   `[GET] /api/MergeRequest/{projectId}/merge_request/{mergeRequestId}`: Récupérer une merge request par ID.
 
 
-![Description de l'image](https://gitlab.dpt-info.univ-littoral.fr/houedji.espoir/gitplugin/-/raw/main/images/capture1.png)
+![Description de l'image](images/capture1.png)
 ![Description de l'image](https://gitlab.dpt-info.univ-littoral.fr/houedji.espoir/gitplugin/-/raw/main/images/capture2.png)
 ![Description de l'image](https://gitlab.dpt-info.univ-littoral.fr/houedji.espoir/gitplugin/-/raw/main/images/languages.png)
 ![Description de l'image](https://gitlab.dpt-info.univ-littoral.fr/houedji.espoir/gitplugin/-/raw/main/images/release.png)
